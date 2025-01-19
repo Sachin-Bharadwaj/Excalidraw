@@ -2,10 +2,11 @@ import { Response, Request, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { JWT_USER_SECRET } from "@repo/backend-common/config";
 
+//const JWT_USER_SECRET = "123123"
 declare global {  
     namespace Express {  
       interface Request {  
-        userId?: number; // Extend the request object here  
+        userId: string; // Extend the request object here  
       }  
     }  
   }
