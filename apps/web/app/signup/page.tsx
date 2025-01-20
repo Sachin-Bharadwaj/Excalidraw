@@ -1,7 +1,7 @@
 "use client";
 import { useReducer, useState } from "react";
 import axios from "axios";
-import { BACKEND_URL } from "../../config";
+import { BACKEND_URL } from "../../../config";
 import { useRouter } from "next/navigation";
 
 export default function SignUp() {

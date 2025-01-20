@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
-import { WS_URL } from "../../config";
+import { WS_URL } from "../../../config";
 
 export function useSocket() {
     const [loading, setLoading] = useState(true);
