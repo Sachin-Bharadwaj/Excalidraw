@@ -62,7 +62,7 @@ wss.on('connection', function connection(ws, request) {
             // then only user can subscribe to this room, we are skipping this for now
             const user = users.find(x => x.ws === ws);
             user?.rooms.push(parsedData.roomId);
-            console.log(`Joined room: ${parsedData}`);
+            console.log(`Joined room: ${JSON.stringify(parsedData)}`);
         }
 
         if (parsedData.type === "leave_room") {
@@ -79,7 +79,7 @@ wss.on('connection', function connection(ws, request) {
         if (parsedData.type === "chat") {
             const roomId = parsedData.roomId;
             const message = parsedData.message;
-            console.log(`Chat message: ${parsedData}`);
+            console.log(`Chat message: ${message}`);
             // store message in database (beter approach is to push it to a Queue)
             try{
                 await prismaClient.chat.create({
@@ -96,7 +96,7 @@ wss.on('connection', function connection(ws, request) {
 
             // iterate and broadcase the message
             users.forEach(user => {
-                if (user.rooms.includes(roomId)) {
+                if (user.rooms.includes(roomId.toString())) {
                     user.ws.send(JSON.stringify({
                         type: "chat",
                         message: message,
